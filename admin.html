@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Z2A Academy — Admin Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Z2A Academy — Admin</h1>
+  </header>
+
+  <main class="container">
+    <section class="card" id="loginCard">
+      <h2>Admin Login</h2>
+      <form id="loginForm" class="form">
+        <label>Username
+          <input type="text" id="username" required>
+        </label>
+        <label>Password
+          <input type="password" id="password" required>
+        </label>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </section>
+
+    <section class="card hidden" id="dashboardCard">
+      <div class="dash-head">
+        <h2>Dashboard</h2>
+        <button id="logoutBtn" class="btn small">Logout</button>
+      </div>
+
+      <div class="card">
+        <h3>Add / Edit Student</h3>
+        <form id="studentForm" class="form">
+          <input type="hidden" id="studentId" />
+          <label>Student Name<input id="s_name" required></label>
+          <label>Roll Number<input id="s_roll" required></label>
+          <label>DOB<input type="date" id="s_dob" required></label>
+          <label>Grade<input id="s_grade" required></label>
+
+          <div>
+            <p>Enter subjects & marks (comma-separated) OR use "Add more":</p>
+            <label>Subjects (comma-separated)<input id="s_subjects_csv" placeholder="Math,English,Science"></label>
+            <label>Marks  (comma-separated)<input id="s_marks_csv" placeholder="50,60,70"></label>
+            <button type="button" id="toggleDynamic" class="btn small">Add more pairs</button>
+          </div>
+
+          <div id="dynamicPairs" class="hidden">
+            <div id="pairsContainer"></div>
+            <button type="button" id="addPair" class="btn small">+ Add pair</button>
+          </div>
+
+          <label>Total Marks<input id="s_total" required></label>
+          <label>Pass/Fail<input id="s_status" required placeholder="Pass or Fail"></label>
+          <div class="form-actions">
+            <button type="submit" class="btn">Save Student</button>
+            <button type="button" id="clearForm" class="btn ghost">Clear</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Students List</h3>
+        <table id="studentsTable">
+          <thead>
+            <tr><th>Name</th><th>Roll</th><th>DOB</th><th>Grade</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© Z2A Academy</small>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Z2A Academy — Student Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Z2A Academy — Student Portal</h1>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Search Result</h2>
+      <form id="searchForm" class="form">
+        <label>Roll Number
+          <input type="text" id="searchRoll" required />
+        </label>
+        <label>Date of Birth (YYYY-MM-DD)
+          <input type="date" id="searchDob" required />
+        </label>
+        <button type="submit" class="btn">Search</button>
+      </form>
+
+      <div id="result" class="hidden card result-card">
+        <h3 id="r_name"></h3>
+        <p><strong>Roll:</strong> <span id="r_roll"></span></p>
+        <p><strong>DOB:</strong> <span id="r_dob"></span></p>
+        <p><strong>Grade:</strong> <span id="r_grade"></span></p>
+        <h4>Subjects & Marks</h4>
+        <ul id="r_subjects"></ul>
+        <p><strong>Total:</strong> <span id="r_total"></span></p>
+        <p><strong>Status:</strong> <span id="r_status"></span></p>
+        <button id="downloadPdf" class="btn">Download PDF</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© Z2A Academy</small>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
