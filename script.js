@@ -1,5 +1,12 @@
 // Common frontend script for both admin.html and index.html
-const API_BASE = location.origin + '/api';
+
+// Detect API base depending on environment
+let API_BASE = '/api'; // default for same-origin (Render deployment)
+
+// If running locally from file:// or a different port, fallback to localhost
+if (location.hostname === 'localhost') {
+  API_BASE = 'http://localhost:3000/api';
+}
 
 // helper
 function qs(id){return document.getElementById(id)}
@@ -8,7 +15,6 @@ function show(el){el.classList.remove('hidden')}
 
 // ========== Admin logic ==========
 if(document.getElementById('loginForm')){
-  // Admin page loaded
   const loginForm = qs('loginForm');
   const loginCard = qs('loginCard');
   const dashboardCard = qs('dashboardCard');
@@ -21,7 +27,6 @@ if(document.getElementById('loginForm')){
   const addPair = qs('addPair');
   const clearForm = qs('clearForm');
 
-  // restore session token if exists
   let token = localStorage.getItem('z2a_token');
   if(token){
     show(dashboardCard); hide(loginCard);
@@ -67,7 +72,6 @@ if(document.getElementById('loginForm')){
   });
 
   addPair.addEventListener('click', ()=>{
-    const idx = pairsContainer.children.length;
     const div = document.createElement('div');
     div.className = 'pair';
     div.innerHTML = `
@@ -88,7 +92,6 @@ if(document.getElementById('loginForm')){
 
   studentForm.addEventListener('submit', async (e)=>{
     e.preventDefault();
-    // gather data
     const id = qs('studentId').value;
     const name = qs('s_name').value.trim();
     const roll = qs('s_roll').value.trim();
@@ -181,7 +184,6 @@ if(document.getElementById('loginForm')){
     qs('s_marks_csv').value = (s.marks||[]).join(',');
     qs('s_total').value = s.total || '';
     qs('s_status').value = s.status || '';
-    // switch to comma mode
     hide(dynamicPairs);
   }
 
@@ -201,7 +203,6 @@ if(document.getElementById('loginForm')){
     }
   }
 }
-
 
 // ========== Student portal logic ==========
 if(document.getElementById('searchForm')){
@@ -223,7 +224,7 @@ if(document.getElementById('searchForm')){
       });
       const data = await res.json();
       if(!res.ok) throw data;
-      // show
+
       r_name.textContent = data.name;
       r_roll.textContent = data.roll;
       r_dob.textContent = data.dob ? data.dob.split('T')[0] : '';
@@ -240,7 +241,6 @@ if(document.getElementById('searchForm')){
       r_status.textContent = data.status || '';
       show(result);
 
-      // attach pdf data
       downloadPdf.onclick = ()=> {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
